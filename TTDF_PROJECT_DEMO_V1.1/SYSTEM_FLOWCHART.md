@@ -7,7 +7,63 @@ This flowchart represents the complete system architecture and operational flow 
 
 ---
 
-## System Architecture Flowchart
+## Simplified System Flow
+
+```mermaid
+flowchart TD
+    Start([System Start]) --> Init[Initialize System<br/>Silicon Labs Stack<br/>RTOS Thread]
+    
+    Init --> HWInit[Initialize Hardware<br/>- Crash Handler<br/>- CoAP Resources<br/>- Relay Control]
+    
+    HWInit --> SensorInit[Initialize Sensors<br/>- Modbus Energy Meter RS485<br/>- Si7021 Temp/Humidity I2C<br/>- VEML6035 Light Sensor I2C]
+    
+    SensorInit --> Network[Connect to Wi-SUN Network<br/>Wait for OPERATIONAL state]
+    
+    Network --> OpenComm[Open Communication Sockets<br/>UDP & CoAP]
+    
+    OpenComm --> MainLoop{Main Loop<br/>Continuous Operation}
+    
+    MainLoop --> CheckConn{Network<br/>Connected?}
+    
+    CheckConn -->|Yes| HandleReq[Handle Incoming Requests<br/>TCP/UDP/CoAP]
+    CheckConn -->|No| Wait[Wait & Monitor]
+    
+    HandleReq --> ProcessReq[Process CoAP Requests<br/>Read Sensors On-Demand<br/>Control Relay<br/>Return Data]
+    
+    Wait --> MainLoop
+    ProcessReq --> SendStatus[Send Status Updates<br/>if Auto-Send Enabled]
+    
+    SendStatus --> MainLoop
+    
+    subgraph CoAP["CoAP API Endpoints"]
+        API1["/sensorStatus - All sensor data"]
+        API2["/meterParam - Energy meter"]
+        API3["/si7021 - Temperature/Humidity"]
+        API4["/luxData - Light sensor"]
+        API5["/ledon, /ledoff - Relay control"]
+    end
+    
+    subgraph Sensors["Connected Sensors"]
+        S1["PZEM-004T Energy Meter<br/>RS485/Modbus"]
+        S2["Si7021<br/>I2C Temp/Humidity"]
+        S3["VEML6035<br/>I2C Light Sensor"]
+        S4["Relay/LED Control<br/>GPIO"]
+    end
+    
+    style Start fill:#90EE90
+    style MainLoop fill:#FFB6C1
+    style Network fill:#98FB98
+    style ProcessReq fill:#87CEEB
+    style CoAP fill:#E6E6FA
+    style Sensors fill:#F0E68C
+```
+
+---
+
+## Detailed System Flow
+
+<details>
+<summary>Click to expand detailed flowchart</summary>
 
 ```mermaid
 flowchart TD
@@ -169,6 +225,8 @@ flowchart TD
     style Connected fill:#98FB98
     style Operational fill:#87CEEB
 ```
+
+</details>
 
 ---
 
