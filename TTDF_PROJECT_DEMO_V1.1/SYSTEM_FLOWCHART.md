@@ -7,6 +7,105 @@ This flowchart represents the complete system architecture and operational flow 
 
 ---
 
+## Project Structure
+
+```
+TTDF_PROJECT_DEMO_V1.1/
+│
+├── main.c                              # Entry point - system initialization
+├── app.c                               # Main application logic and state machine
+├── app.h                               # Application header file
+├── app_init.c                          # Application initialization (RTOS thread)
+│
+├── app_coap.c                          # CoAP request handlers
+├── app_coap.h                          # CoAP function prototypes
+│
+├── modbusmaster.c                      # Modbus RTU master for energy meter
+├── modbusmaster.h                      # Modbus function prototypes
+│
+├── app_tcp_server.c                    # TCP server implementation
+├── app_tcp_server.h                    # TCP server header
+├── app_udp_server.c                    # UDP server implementation
+├── app_udp_server.h                    # UDP server header
+├── app_direct_connect.c                # Direct Connect peer-to-peer
+├── app_direct_connect.h                # Direct Connect header
+├── app_check_neighbors.c               # Neighbor discovery & monitoring
+├── app_check_neighbors.h               # Neighbor monitoring header
+│
+├── app_parameters.c                    # Persistent settings (NVM3)
+├── app_parameters.h                    # Parameters header
+├── app_timestamp.c                     # Time tracking utilities
+├── app_timestamp.h                     # Timestamp header
+├── app_reporter.c                      # RTT trace event reporter
+├── app_reporter.h                      # Reporter header
+├── app_rtt_traces.c                    # Debug trace filtering
+├── app_rtt_traces.h                    # RTT traces header
+├── sl_wisun_crash_handler.c            # Crash detection & logging
+├── sl_wisun_crash_handler.h            # Crash handler header
+├── app_list_configs.c                  # RF configuration listing
+├── app_list_configs.h                  # Config list header
+│
+├── app_wisun_multicast_ota.c           # Multicast OTA DFU handler
+├── app_wisun_multicast_ota.h           # OTA header
+│
+├── sl_wisun_regdb.c                    # Regional frequency database
+│
+├── config/                             # Configuration files folder
+│   ├── app_project_info_config.h       # Project metadata
+│   ├── app_properties_config.h         # App version (for OTA)
+│   ├── pin_config.h                    # GPIO pin assignments
+│   ├── sl_i2cspm_sensor_config.h       # I2C bus configuration
+│   ├── psa_crypto_config.h             # Security configuration
+│   ├── os_cfg.h                        # OS configuration
+│   ├── rtos_cfg.h                      # RTOS settings
+│   └── ...
+│
+├── autogen/                            # Auto-generated files
+│   ├── sl_wisun_config.c               # Wi-SUN stack config
+│   ├── sl_wisun_config.h               # Wi-SUN config header
+│   ├── sl_board_default_init.c         # Board initialization
+│   ├── rail_config.c                   # Radio configuration
+│   ├── rail_config.h                   # Radio config header
+│   ├── sl_event_handler.c              # Event dispatcher
+│   ├── sl_event_handler.h              # Event handler header
+│   ├── sl_iostream_init_eusart_instances.c  # UART initialization
+│   ├── sl_iostream_init_eusart_instances.h  # UART init header
+│   ├── sl_simple_led_instances.c       # LED control
+│   ├── sl_simple_led_instances.h       # LED header
+│   └── ...
+│
+├── README.md                           # Complete project guide
+├── SYSTEM_FLOWCHART.md                 # This file - flow diagrams
+├── COAP-INFO.md                        # CoAP API reference
+├── PIN_REFERENCE.md                    # Pin configuration table
+├── RPL_INSTANCE_ID.md                  # Routing instance info
+├── OTA_DFU_SETUP.md                    # OTA update guide
+├── TTDF_PROJECT_CIRUIT_DIAGRAM.png     # Hardware circuit diagram
+│
+├── simplicity_sdk_2025.6.2/            # Silicon Labs SDK
+├── GNU ARM v12.2.1 - Debug/            # Build output directory
+│
+├── TTDF_PROJECT_DEMO_V1.slcp           # Simplicity Studio project file
+├── TTDF_PROJECT_DEMO_V1.1.pintool      # Pin configuration tool
+├── .cproject                           # Eclipse CDT project
+├── .project                            # Eclipse project
+└── .slps                               # Simplicity Studio project state
+```
+
+### Key Files Explained:
+
+| File | Purpose |
+|------|---------|
+| **main.c** | Entry point, calls `app_init()` and `app_process_action()` |
+| **app.c** | Main application loop, Wi-SUN event handling, join state management |
+| **app_init.c** | Creates RTOS task for application |
+| **app_coap.c** | All CoAP endpoints - sensor data acquisition & relay control |
+| **modbusmaster.c** | Modbus RTU master for energy meter communication |
+| **app_parameters.c** | Persistent parameters stored in NVM3 |
+| **sl_wisun_crash_handler.c** | Detects and logs system crashes |
+
+---
+
 ## Simplified System Flow
 
 ```mermaid
