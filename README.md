@@ -1,125 +1,104 @@
-# TTDF_PROJECT_DEMO_V1
+# TTDF Wi-SUN Projects
 
-## Project Overview
+## Overview
 
-TTDF_PROJECT_DEMO_V1 is an advanced Industrial IoT demonstration project built on Silicon Labs' Wi-SUN FAN (Field Area Network) technology. This project showcases a complete implementation of wireless mesh networking for industrial monitoring and control applications, featuring Modbus protocol integration for seamless communication with industrial equipment and sensors.
+This repository contains two advanced Wi-SUN mesh networking projects built on Silicon Labs' EFR32ZG28 Series 2 wireless SoCs. Both projects demonstrate best practices for industrial IoT, sensor integration, and mesh networking applications.
 
-The project is specifically designed for Silicon Labs EFR32ZG28 Series 2 wireless SoCs and demonstrates best practices for building robust, scalable industrial IoT solutions with Wi-SUN mesh networking.
+### Available Projects
 
-## Key Features
+#### 1. TTDF_PROJECT_DEMO_V1
+An industrial-grade IoT demonstration project with comprehensive networking and Modbus integration.
 
-### Networking & Connectivity
-- **Wi-SUN FAN Mesh Network:** Full implementation of IEEE 802.15.4g-based mesh networking with automatic routing and self-healing capabilities
-- **CoAP Protocol Support:** Lightweight RESTful communication protocol optimized for constrained devices and networks
-- **TCP/UDP Server:** Dual-stack server implementation for flexible data exchange with external systems
-- **Multicast Communication:** Efficient one-to-many communication for network-wide operations
-- **Direct Connect Capability:** Point-to-point connection support for specialized use cases
+**Location:** `Software/TTDF_PROJECT_DEMO_V1.1/`
 
-### Industrial Protocols
-- **Modbus Master Implementation:** Industry-standard Modbus protocol support for communicating with PLCs, sensors, and actuators
-- **Multiple Endpoint Support:** Flexible endpoint mapping system for diverse device integration
-- **Real-time Data Acquisition:** High-performance sensor reading and data collection
+**Key Features:**
+- Wi-SUN FAN mesh networking with IEEE 802.15.4g
+- CoAP protocol support with multiple endpoints
+- TCP/UDP server implementation
+- Modbus Master protocol for industrial equipment
+- Over-The-Air (OTA) firmware updates via multicast
+- Network diagnostics and monitoring
+- Real-time RTT tracing
 
-### Network Management
-- **Neighbor Discovery:** Automatic detection and tracking of nearby Wi-SUN nodes
-- **Network Diagnostics:** Comprehensive network health monitoring and reporting
-- **RPL Instance Management:** Proper routing protocol configuration for optimal mesh performance
-- **Crash Handler:** Robust error handling and recovery mechanisms
+**Use Case:** Industrial monitoring and control, equipment integration, smart energy management
 
-### Firmware & Updates
-- **OTA (Over-The-Air) Updates:** Wireless firmware updates via multicast for entire network segments
-- **Bootloader Integration:** Secure bootloader configuration for safe firmware management
+---
 
-### Monitoring & Debugging
-- **RTT (Real-Time Transfer) Traces:** High-speed debug output without UART overhead
-- **Application Reporter:** Structured logging and event reporting system
-- **Timestamp Management:** Accurate time synchronization across the network
-- **Configuration Listing:** Runtime configuration inspection and management
+#### 2. PHY_COAP_CODE
+A focused Wi-SUN sensor hub application with rich CoAP REST API endpoints.
+
+**Location:** `Software/PHY_COAP_CODE/`
+
+**Key Features:**
+- 40+ CoAP RESTful endpoints
+- Multi-sensor integration (Si7021, VEML6035)
+- Modbus RTU energy meter support
+- Relay control via CoAP commands
+- Network diagnostics and RPL routing info
+- Persistent storage (NVM3) for configuration
+- Full connection statistics and neighbor tracking
+
+**Use Case:** Environmental monitoring, sensor data collection, remote device control
+
+---
 
 ## Hardware Requirements
 
-- **Board:** Silicon Labs EFR32ZG28 development board (BRD2705A, BRD4163A, BRD4164A, BRD4170A, BRD4253A, BRD4254A, BRD4270B, BRD4271A, BRD4272A, BRD4400C, BRD4401A/B/C)
+- **Board:** Silicon Labs EFR32ZG28 development board
+  - Compatible models: BRD2705A, BRD4163A, BRD4164A, BRD4170A, BRD4253A, BRD4254A, BRD4270B, BRD4271A, BRD4272A, BRD4400C, BRD4401A/B/C
 - **Toolchain:** ARM GCC v12.2.1 or later
 - **IDE:** Simplicity Studio v5 with Simplicity SDK 2025.6.2 or later
 
-## Project Architecture
+## Quick Start
 
-### Core Application Modules
+### Importing a Project
 
-- **`app.c/h`** - Main application logic and state machine
-- **`main.c`** - Application entry point and initialization
-- **`app_init.c`** - Hardware and software component initialization
-
-### Network Communication
-
-- **`app_coap.c/h`** - CoAP server implementation and endpoint handlers
-- **`app_tcp_server.c/h`** - TCP server for persistent connections
-- **`app_udp_server.c/h`** - UDP server for connectionless communication
-- **`app_direct_connect.c/h`** - Direct device-to-device communication
-
-### Industrial Integration
-
-- **`modbusmaster.c/h`** - Modbus Master protocol implementation
-- **`app_parameters.c/h`** - Device parameter management and storage
-
-### Network Services
-
-- **`app_check_neighbors.c/h`** - Wi-SUN neighbor discovery and monitoring
-- **`app_wisun_multicast_ota.c/h`** - Firmware update distribution system
-- **`app_list_configs.c/h`** - Configuration management interface
-
-### Utilities & Support
-
-- **`app_reporter.c/h`** - Event logging and reporting framework
-- **`app_timestamp.c/h`** - Time synchronization and timestamping
-- **`app_rtt_traces.c/h`** - SEGGER RTT debug output
-- **`sl_wisun_crash_handler.c/h`** - Error handling and recovery
-- **`sl_wisun_regdb.c`** - Regulatory domain database
-
-## Getting Started
-
-### Build Instructions
-
-1. Open Simplicity Studio 5
-2. Import the project: `File -> Import -> MCU Project`
-3. Navigate to `TTDF_PROJECT_DEMO_V1/TTDF_PROJECT_DEMO_V1.slcp`
-4. Select your target board from the list
-5. Build the project: `Project -> Build Project`
+1. Open **Simplicity Studio 5**
+2. Select **File → Import → MCU Project**
+3. Browse to the desired project location:
+   - TTDF Project: `Software/TTDF_PROJECT_DEMO_V1.1/TTDF_PROJECT_DEMO_V1.slcp`
+   - PHY CoAP: `Software/PHY_COAP_CODE/PHY_COAP_CODE.slcp`
+4. Select your target board
+5. Click **Import** and **Build Project**
 
 ### Flashing the Device
 
-1. Connect your EFR32ZG28 board via USB
-2. Right-click the project → `Run As -> Silicon Labs ARM Program`
-3. Or use Commander CLI:
-   ```
-   commander flash GNU\ ARM\ v12.2.1\ -\ Debug/TTDF_PROJECT_DEMO_V1.hex
-   ```
+Using Simplicity Studio:
+- Right-click project → `Run As → Silicon Labs ARM Program`
 
-### Configuration
+Using Commander CLI:
+```bash
+# TTDF Project
+commander flash Software/TTDF_PROJECT_DEMO_V1.1/GNU\ ARM\ v12.2.1\ -\ Debug/TTDF_PROJECT_DEMO_V1.hex
 
-Key configuration files located in `config/` directory:
+# PHY CoAP Code
+commander flash Software/PHY_COAP_CODE/GNU\ ARM\ v12.2.1\ -\ Debug/PHY_COAP_CODE.hex
+```
 
-- **Wi-SUN Settings:** `autogen/sl_wisun_config.c/h`
-- **Network Parameters:** Modify via `app_parameters.c`
-- **Pin Configuration:** `config/pin_config.h`
-- **CoAP Endpoints:** See `COAP-INFO.md` for endpoint mapping
+## Project Details
 
-## Documentation
+For detailed documentation, configuration guides, and API specifications, refer to the README.md files within each project folder:
 
-Comprehensive documentation available in the project directory:
+- [TTDF_PROJECT_DEMO_V1 - Detailed Documentation](Software/TTDF_PROJECT_DEMO_V1.1/README.md)
+- [PHY_COAP_CODE - Detailed Documentation](Software/PHY_COAP_CODE/readme.md)
 
-- **`README.md`** - Project overview and quick start (this file)
-- **`COAP-INFO.md`** - CoAP endpoint definitions and usage
-- **`ENDPOINT_MAPPING.md`** - Device endpoint configuration
-- **`NEW_ENDPOINT_SUMMARY.md`** - Latest endpoint additions
-- **`PIN_REFERENCE.md`** - Hardware pin assignments
-- **`RPL_INSTANCE_ID.md`** - Routing protocol configuration
+## Key Features Comparison
 
-## Network Setup
+| Feature | TTDF Project | PHY CoAP |
+|---------|--------------|----------|
+| CoAP Endpoints | ✓ | ✓✓ (40+) |
+| Modbus Support | ✓✓ (Master) | ✓ (RTU) |
+| TCP/UDP Servers | ✓ | - |
+| OTA Updates | ✓ | - |
+| Sensor Integration | ✓ | ✓✓ (Multiple) |
+| Network Diagnostics | ✓ | ✓ |
+| Multicast Support | ✓ | - |
 
-### Border Router Configuration
+## Common Configuration
 
-A Wi-SUN Border Router is required to connect the mesh network to external networks. Configure your border router with:
+### Wi-SUN Network Setup
+
+Both projects require a Wi-SUN Border Router for mesh network connectivity. Configure your border router with:
 
 - Compatible regulatory domain
 - Matching network name and security credentials
@@ -133,60 +112,44 @@ A Wi-SUN Border Router is required to connect the mesh network to external netwo
 4. Receives network parameters via bootstrap
 5. Begins normal operation once fully connected
 
-## Modbus Integration
+## Debugging & Analysis
 
-The Modbus Master implementation supports:
+### Tools
 
-- **RTU Mode:** Serial communication (configurable UART)
-- **Read Operations:** Coils, Discrete Inputs, Holding Registers, Input Registers
-- **Write Operations:** Single/Multiple Coils and Registers
-- **Flexible Addressing:** Support for 247 slave devices
+- **SEGGER RTT Viewer** - Real-time trace output and debugging
+- **Network Analyzer** - Wi-SUN packet inspection and analysis
+- **Commander CLI** - Device interrogation and firmware management
+- **Simplicity Studio Debugger** - Step-through debugging
 
-Configure Modbus parameters in `modbusmaster.c` or via CoAP endpoints.
+### RTT Output
 
-## Development Notes
-
-### Debugging
-
-- Use SEGGER RTT Viewer for real-time trace output
-- Network Analyzer for Wi-SUN packet inspection
-- Commander CLI for device interrogation
-
-### Power Optimization
-
-- Configure sleep modes in `config/os_cfg.h`
-- Tune Wi-SUN timing parameters for power/latency tradeoff
-- Use event-driven architecture to minimize active time
-
-### Security
-
-- Pre-shared keys configured in keychain
-- Support for AES-128 encryption
-- Device authentication via EUI-64 identifiers
+Both projects support high-speed RTT (Real-Time Transfer) for fast debug output without UART overhead.
 
 ## Troubleshooting
 
 **Device won't join network:**
 - Verify Border Router is operational
-- Check network credentials match
+- Check network credentials match configuration
 - Ensure regulatory domain compatibility
-- Review `RPL_INSTANCE_ID.md` for configuration
 
-**Modbus communication fails:**
-- Verify physical wiring and UART configuration
-- Check slave device address and register map
-- Confirm baud rate and parity settings match
+**Build errors after import:**
+- Verify SDK version (2025.6.2 or later)
+- Check compiler path configuration
+- Rebuild the project with clean build
 
-**OTA update issues:**
-- Ensure sufficient flash space
-- Verify multicast group membership
-- Check firmware image compatibility
+**Sensor not responding:**
+- Verify I2C/UART connections (PHY CoAP specific)
+- Check peripheral addresses and pull-up resistors
+- Review pin configuration in respective projects
 
 ## License & Support
 
-This project is experimental quality and provided as a demonstration platform. For production deployments, additional testing and certification may be required.
+These projects are experimental quality and provided as demonstration platforms. For production deployments, additional testing and certification may be required.
 
-For technical support, consult Silicon Labs documentation or community forums.
+For technical support, consult:
+- Silicon Labs official documentation
+- Community forums and documentation
+- Project-specific README files in each directory
 
 ## Author
 
@@ -194,5 +157,4 @@ Himanshu Fanibhare
 
 ## Version
 
-Demo V1 - January 2026
-
+Multi-Project Release V1.0 - March 2026
