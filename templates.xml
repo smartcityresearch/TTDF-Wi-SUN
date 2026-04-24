@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
-  <descriptors name="TTDF_PROJECT_DEMO_V1" label="TTDF Project Demo V1" description="Demo project for TTDF hardware integration. Short readme: Wi-SUN demo and examples." author="Himanshu Fanibhare">
+  <descriptors name="TTDF_WISUN_NODE_MONITORING_SYSTEM" label="TTDF Wi-SUN Node Monitoring System" description="TTDF Wi-SUN node monitoring and control system with CoAP and OTA DFU support." author="Himanshu Fanibhare">
     <properties key="namespace" value="template.uc"/>
-    <properties key="projectFilePaths" value="Software/TTDF_PROJECT_DEMO_V1.1/TTDF_PROJECT_DEMO_V1.slcp"/>
-    <properties key="readmeFiles" value="Software/TTDF_PROJECT_DEMO_V1.1/README.md"/>
+    <properties key="projectFilePaths" value="Software/TTDF Wi-SUN Node Monitoring System/TTDF_Wi-SUN_Node_Monitoring_System.slcp"/>
+    <properties key="readmeFiles" value="Software/TTDF Wi-SUN Node Monitoring System/README.md"/>
     <properties key="boardCompatibility" value="brd2705a brd4163a brd4164a brd4170a  brd4253a brd4254a brd4270b brd4271a brd4272a brd4400c brd4401a brd4401b brd4401c com.silabs.board.none"/>
-    <properties key="partCompatibility" value=".*efr32zg28.* "/>
+    <properties key="partCompatibility" value=".*efr32zg28.*"/>
     <properties key="ideCompatibility" value="simplicity-ide"/>
     <properties key="toolchainCompatibility" value="gcc"/>
     <properties key="category" value="Example|Wi-SUN"/>
@@ -13,12 +13,12 @@
     <properties key="deviceType" value="SoC"/>
     <properties key="projectDifficulty" value="Beginner"/>
   </descriptors>
-  <descriptors name="PHY_COAP_CODE" label="PHY CoAP Code" description="Wi-SUN CoAP protocol implementation and examples. Lightweight RESTful communication optimized for constrained devices. This project supports CoAP only and does not support OTA." author="Himanshu Fanibhare">
+  <descriptors name="TTDF_PHY_NODE_MONITORING" label="TTDF PHY Node Monitoring" description="PHY-focused Wi-SUN node monitoring project with CoAP and OTA DFU support." author="Himanshu Fanibhare">
     <properties key="namespace" value="template.uc"/>
-    <properties key="projectFilePaths" value="Software/PHY_COAP_CODE/PHY_COAP_CODE.slcp"/>
-    <properties key="readmeFiles" value="Software/PHY_COAP_CODE/readme.md"/>
+    <properties key="projectFilePaths" value="Software/TTDF-PHY-NODE-MONITORING/TTDF-PHY-NODE-MONITORING.slcp"/>
+    <properties key="readmeFiles" value="Software/TTDF-PHY-NODE-MONITORING/README.md"/>
     <properties key="boardCompatibility" value="brd2705a brd4163a brd4164a brd4170a  brd4253a brd4254a brd4270b brd4271a brd4272a brd4400c brd4401a brd4401b brd4401c com.silabs.board.none"/>
-    <properties key="partCompatibility" value=".*efr32zg28.* "/>
+    <properties key="partCompatibility" value=".*efr32zg28.*"/>
     <properties key="ideCompatibility" value="simplicity-ide"/>
     <properties key="toolchainCompatibility" value="gcc"/>
     <properties key="category" value="Example|Wi-SUN"/>
