@@ -21,6 +21,7 @@ readme:
 - {path: COAP-INFO.md}
 - {path: PIN_REFERENCE.md}
 - {path: RPL_INSTANCE_ID.md}
+- {path: OTA_DFU_SETUP.md}
 - {path: README.md}
 - {path: COAP-INFO.md}
 - {path: PIN_REFERENCE.md}
